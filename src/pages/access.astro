@@ -15,12 +15,13 @@ import Layout from "../layouts/Layout.astro";
     </header>
 
     <form
-      name="access-request"
-      method="POST"
-      data-netlify="true"
-      netlify
-      class="grid grid-cols-1 gap-6 sm:grid-cols-2 rounded-2xl border border-gray-200 bg-white/70 p-8 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/70"
-    >
+     <form
+  name="access-request"
+  method="POST"
+  data-netlify="true"
+  action="/thanks"
+  class="grid grid-cols-1 gap-6 sm:grid-cols-2 rounded-2xl border border-gray-200 bg-white/70 p-8 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/70"
+>
       <input type="hidden" name="form-name" value="access-request" />
 
       <!-- Full name -->
