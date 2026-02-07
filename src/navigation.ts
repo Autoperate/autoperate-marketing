@@ -1,34 +1,16 @@
-import { getPermalink, getAsset } from './utils/permalinks';
+import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 
 export const headerData = {
   links: [
-    { text: 'How it works', href: getPermalink('/#how-it-works') },
-    { text: 'Pricing', href: getPermalink('/pricing') },
-    { text: 'About', href: getPermalink('/about') },
+    { text: 'Home', href: getPermalink('/') },
     { text: 'Request access', href: getPermalink('/access') },
+    { text: 'Blog', href: getBlogPermalink() },
   ],
   actions: [],
 };
 
 export const footerData = {
-  links: [
-    {
-      title: 'Autoperate',
-      links: [
-        { text: 'How it works', href: getPermalink('/#how-it-works') },
-        { text: 'Pricing', href: getPermalink('/pricing') },
-        { text: 'About', href: getPermalink('/about') },
-        { text: 'Request access', href: getPermalink('/access') },
-      ],
-    },
-    {
-      title: 'Legal',
-      links: [
-        { text: 'Terms', href: getPermalink('/terms') },
-        { text: 'Privacy Policy', href: getPermalink('/privacy') },
-      ],
-    },
-  ],
+  links: [],
   secondaryLinks: [
     { text: 'Terms', href: getPermalink('/terms') },
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
