@@ -88,18 +88,20 @@ import Layout from "../layouts/Layout.astro";
         />
       </div>
 
-      <!-- Website -->
-      <div>
-        <label class="block text-sm font-medium text-gray-900 dark:text-white">
-          Website or public profile (optional)
-        </label>
-        <input
-          type="url"
-          name="website"
-          placeholder="https://…"
-          class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-gray-900 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-        />
-      </div>
+     <!-- Website or public profile (optional) -->
+<div>
+  <label class="block text-sm font-medium text-gray-900 dark:text-white">
+    Website or public profile (optional)
+  </label>
+  <input
+    type="text"
+    name="website"
+    placeholder="example.com or https://example.com"
+    inputmode="url"
+    autocomplete="url"
+    class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-gray-900 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+  />
+</div>
 
       <!-- Role -->
       <div>
