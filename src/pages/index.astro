@@ -1,4 +1,5 @@
 ---
+import '~/styles/homepage-colors.css';  // ← NEW: homepage color overrides
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
@@ -40,8 +41,11 @@ const metadata = {
   </Hero>
 
   <!-- Philosophy Note ************** -->
-
-  <Note title="Philosophy" description="Facts are immutable. Interpretation is human." />
+  
+  <!-- Wrapped in an accent band for homepage colors -->
+  <div class="ao-philosophy-band">
+    <Note title="Philosophy" description="Facts are immutable. Interpretation is human." />
+  </div>
 
   <!-- What Autoperate does ********* -->
 
