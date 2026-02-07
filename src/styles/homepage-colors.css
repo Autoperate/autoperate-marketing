@@ -1,1 +1,11 @@
+/* Experimental homepage color tests */
+:root {
+  --ao-gold: #B08D3A;
+  --ao-green: #0E7769;
+}
+
+.ao-philosophy-band {
+  border-top: 1px solid var(--ao-gold);
+  border-bottom: 1px solid var(--ao-gold);
+}
 
