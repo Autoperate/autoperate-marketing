@@ -2,20 +2,26 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Request received — Autoperate',
+  title: 'Submission received — Autoperate',
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
   <section class="mx-auto max-w-2xl px-4 py-16">
-    <h1 class="text-3xl font-semibold tracking-tight dark:text-white">Request received</h1>
+    <h1 class="text-3xl font-semibold tracking-tight dark:text-white">
+      Submission received
+    </h1>
+
     <p class="mt-4 text-gray-600 dark:text-slate-300">
-      Thanks. We review requests manually. If it’s a fit, you’ll hear from us.
+      This does not guarantee access. We review each request one at a time. We will be in touch for more information if necessary.
     </p>
 
     <div class="mt-8">
-      <a href="/" class="text-sm text-gray-600 hover:text-gray-900 dark:text-slate-300 dark:hover:text-white">
+      <a
+        href="/"
+        class="text-sm text-gray-600 hover:text-gray-900 dark:text-slate-300 dark:hover:text-white"
+      >
         ← Back to homepage
       </a>
     </div>
