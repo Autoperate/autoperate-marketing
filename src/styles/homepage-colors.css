@@ -8,4 +8,18 @@
   border-top: 1px solid var(--ao-gold);
   border-bottom: 1px solid var(--ao-gold);
 }
+/* ⚠️ Debug test: if this DOES NOT show a red border on the hero, CSS is not loading */
+body {
+  outline: 3px solid red !important;
+}
+
+/* Other experimental rules */
+:root {
+  --ao-gold: #B08D3A;
+}
+
+.ao-philosophy-band {
+  border-top: 1px solid var(--ao-gold);
+  border-bottom: 1px solid var(--ao-gold);
+}
 
