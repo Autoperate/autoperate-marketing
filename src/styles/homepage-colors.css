@@ -1,51 +1,73 @@
-/* HOMEPAGE COLOR TESTING — ACCENT RULES (INK + GOLD, ADD GREEN WITHOUT BLUE) */
+/* src/styles/homepage-colors.css
+   Autoperate Homepage Overrides (v3)
+   GOAL:
+   - Make Autoperate GREEN the primary accent
+   - Reduce GOLD to a secondary “witness mark”
+   - Kill AstroWind BLUE regressions (sticky nav + footer + primary utilities)
+*/
 
 /* ------------------------------------------------------------
-   Core tokens (institutional, neutral, non-SaaS)
+   Tokens
 ------------------------------------------------------------ */
 :root {
-  /* Accent */
-  --ao-gold: #B08D3A;   /* institutional gold */
-  --ao-green: #0E7769;  /* brand green (use sparingly) */
+  --ao-green: #0E7769;
+  --ao-green-hover: #14A288;
 
-  /* Neutrals (reduce "navy", move to ink/charcoal) */
-  --ao-ink-950: #070B0E;     /* near-black */
-  --ao-ink-900: #0B1116;     /* main background */
-  --ao-ink-850: #0E161D;     /* section alt */
-  --ao-ink-800: #101C24;     /* cards / surfaces */
-  --ao-ink-700: #13232D;     /* borders */
-  --ao-text: #E7EEF6;        /* primary text */
-  --ao-text-muted: #A8B6C4;  /* secondary text */
+  /* secondary accent only */
+  --ao-gold: #B08D3A;
+
+  /* ink neutrals */
+  --ao-ink-950: #070B0E;
+  --ao-ink-900: #0B1116;
+  --ao-ink-850: #0E161D;
+  --ao-ink-800: #101C24;
+
+  --ao-text: #E7EEF6;
+  --ao-text-muted: #A8B6C4;
+
+  /* Map common theme variables back to brand green (so “primary” isn’t blue) */
+  --aw-color-primary: 14 119 105; /* rgb triplet */
+  --aw-color-accent: 14 119 105;
+  --aw-color-link: 14 119 105;
+  --aw-color-ring: 14 119 105;
 }
 
 /* ------------------------------------------------------------
-   Global background + typography tone
+   Global background + typography
 ------------------------------------------------------------ */
-html, body {
-  background: radial-gradient(1200px 800px at 50% 0%,
-      rgba(176, 141, 58, 0.06) 0%,
-      rgba(7, 11, 14, 0.0) 55%),
+html,
+body {
+  background:
+    radial-gradient(1200px 800px at 50% 0%,
+      rgba(14, 119, 105, 0.08) 0%,
+      rgba(7, 11, 14, 0) 55%),
     linear-gradient(180deg, var(--ao-ink-900) 0%, var(--ao-ink-950) 100%) !important;
   color: var(--ao-text) !important;
 }
 
-p, li, .text-muted, [class*="text-"] {
+p,
+li,
+.text-muted,
+[class*="text-"] {
   color: var(--ao-text-muted);
 }
 
 /* ------------------------------------------------------------
-   1) Header separator + kill AstroWind blue (including scrolled/sticky)
+   HEADER / NAV — prevent sticky state from reverting to AstroWind blue
 ------------------------------------------------------------ */
-header {
-  border-bottom: 1px solid rgba(176, 141, 58, 0.55) !important;
+/* Base (top of page) */
+header,
+#header,
+.site-header,
+.navbar,
+nav {
+  background-color: rgba(11, 17, 22, 0.86) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(14, 119, 105, 0.28) !important;
 }
 
-/* Base header background (prevents default theme blue) */
-header, nav {
-  background-color: rgba(11, 17, 22, 0.92) !important;
-}
-
-/* Sticky/scrolled header states (AstroWind variants) */
+/* Sticky / scrolled variants (AstroWind uses many) */
 header.is-sticky,
 header.sticky,
 header.isSticky,
@@ -53,90 +75,90 @@ header.scrolled,
 header[data-sticky="true"],
 header[data-aw-sticky="true"],
 header[data-headroom="pinned"],
-header[data-headroom="unpinned"],
-.header.is-sticky,
-.header.sticky,
-.header.scrolled,
 .navbar.sticky,
 .navbar.is-sticky,
 .navbar.scrolled,
 nav.sticky,
-nav.is-sticky,
 nav.scrolled,
 .scrolled header,
 .scrolled nav {
-  background-color: rgba(11, 17, 22, 0.94) !important; /* stay ink, never blue */
-  border-bottom: 1px solid rgba(176, 141, 58, 0.40) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(11, 17, 22, 0.96) !important;
+  border-bottom: 1px solid rgba(14, 119, 105, 0.40) !important;
+}
+
+/* If any header/nav element itself gets a “bg-primary” class on scroll, force it off blue */
+header.bg-primary,
+nav.bg-primary,
+.navbar.bg-primary,
+header [class*="bg-primary"],
+nav [class*="bg-primary"] {
+  background-color: rgba(11, 17, 22, 0.96) !important;
 }
 
 /* ------------------------------------------------------------
-   2) Section title accents (gold witness mark)
+   SECTION EYEBROWS — CAPABILITIES / METHOD / MEASURES / FAQS => GREEN
+   (these are the small uppercase labels above H2)
+------------------------------------------------------------ */
+section p.uppercase,
+section span.uppercase,
+section .uppercase.tracking-widest,
+section .tracking-widest.uppercase,
+#main section p.uppercase,
+#main section span.uppercase {
+  color: var(--ao-green) !important;
+}
+
+/* ------------------------------------------------------------
+   Headings: keep H2/H3 calm + serious (NOT gold-led)
 ------------------------------------------------------------ */
 section h2,
 section h3 {
-  color: var(--ao-gold) !important;
-  letter-spacing: 0.2px;
+  color: var(--ao-text) !important;
+}
+
+/* Subtle witness mark: thin underline / divider tone (optional, but restrained) */
+section h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-top: 10px;
+  background: rgba(176, 141, 58, 0.30); /* gold only as witness */
 }
 
 /* ------------------------------------------------------------
-   2b) EYEBROWS: “CAPABILITIES / METHOD / MEASURES / FAQS” -> Autoperate Green
-   These are commonly uppercase + tracking-widest in AstroWind.
+   ICONS — remove bright blue badges; use GREEN strokes
 ------------------------------------------------------------ */
-.uppercase.tracking-widest,
-.tracking-widest.uppercase,
-section p.uppercase,
-section span.uppercase,
-section .uppercase,
-section [class*="tracking-widest"],
-section [class*="tracking-wider"] {
-  color: var(--ao-green) !important;
-}
-
-/* If the eyebrow is rendered as a small label above headings with specific utility combos */
-section .text-xs.uppercase,
-section .text-sm.uppercase,
-section .text-xs.tracking-widest,
-section .text-sm.tracking-widest {
-  color: var(--ao-green) !important;
-}
-
-/* ------------------------------------------------------------
-   3) ICONS: kill bright blue circles, keep gold strokes
------------------------------------------------------------- */
-
-/* Gold stroke for SVG icons */
 [class*="icon"] svg,
 [class*="Icon"] svg {
-  stroke: var(--ao-gold) !important;
+  stroke: var(--ao-green) !important;
   fill: none !important;
 }
 
-/* Circular icon wrappers: remove blue, keep quiet gold-tinted badge */
-[class*="icon"] > span,
-[class*="Icon"] > span,
+/* Circular icon wrappers / badges: kill blue fill */
 span[class*="icon"],
 span[class*="Icon"],
 div[class*="icon"],
-div[class*="Icon"] {
-  background-color: rgba(176, 141, 58, 0.10) !important;
-  border: 1px solid rgba(176, 141, 58, 0.22) !important;
+div[class*="Icon"],
+[class*="badge"],
+[class*="Badge"] {
+  background-color: rgba(14, 119, 105, 0.10) !important;
+  border: 1px solid rgba(14, 119, 105, 0.22) !important;
   box-shadow: none !important;
 }
 
-/* If template uses bg-primary / text-primary, force them AWAY from blue */
-[class*="bg-primary"],
-.bg-primary {
-  background-color: rgba(176, 141, 58, 0.12) !important;
+/* Common Tailwind “primary” utilities */
+.bg-primary,
+[class*="bg-primary"] {
+  background-color: rgba(14, 119, 105, 0.12) !important;
 }
-[class*="text-primary"],
-.text-primary {
-  color: var(--ao-gold) !important;
+.text-primary,
+[class*="text-primary"] {
+  color: var(--ao-green) !important;
 }
 
 /* ------------------------------------------------------------
-   4) BUTTONS: replace electric blue with restrained gold/ink
+   BUTTONS — primary = GREEN, secondary = ink + green border
 ------------------------------------------------------------ */
 button,
 a.button,
@@ -146,16 +168,16 @@ a.btn,
   border-radius: 999px;
 }
 
-/* Primary CTA buttons */
+/* Primary CTA (Request access) */
 a[href*="request"],
 a[href*="access"],
 button[type="submit"],
 .btn-primary,
 .button-primary,
 .primary {
-  background-color: rgba(176, 141, 58, 0.92) !important;
-  color: #0B1116 !important;
-  border: 1px solid rgba(176, 141, 58, 0.35) !important;
+  background-color: var(--ao-green) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(14, 119, 105, 0.45) !important;
   box-shadow: none !important;
 }
 a[href*="request"]:hover,
@@ -163,10 +185,11 @@ a[href*="access"]:hover,
 .btn-primary:hover,
 .button-primary:hover,
 .primary:hover {
-  background-color: rgba(176, 141, 58, 1.0) !important;
+  background-color: var(--ao-green-hover) !important;
+  border-color: rgba(20, 162, 136, 0.55) !important;
 }
 
-/* Secondary button */
+/* Secondary button (How it works) */
 a[href*="how"],
 a[href*="works"],
 .btn-secondary,
@@ -174,7 +197,7 @@ a[href*="works"],
 .secondary {
   background-color: transparent !important;
   color: var(--ao-text) !important;
-  border: 1px solid rgba(176, 141, 58, 0.28) !important;
+  border: 1px solid rgba(14, 119, 105, 0.35) !important;
   box-shadow: none !important;
 }
 a[href*="how"]:hover,
@@ -182,49 +205,40 @@ a[href*="works"]:hover,
 .btn-secondary:hover,
 .button-secondary:hover,
 .secondary:hover {
-  border-color: rgba(176, 141, 58, 0.45) !important;
-  background-color: rgba(176, 141, 58, 0.06) !important;
+  background-color: rgba(14, 119, 105, 0.08) !important;
+  border-color: rgba(14, 119, 105, 0.55) !important;
 }
 
-/* Remove any remaining “electric” focus rings */
+/* Focus rings: green, not electric blue */
 *:focus {
   outline: none !important;
 }
 *:focus-visible {
-  outline: 2px solid rgba(176, 141, 58, 0.35) !important;
+  outline: 2px solid rgba(14, 119, 105, 0.38) !important;
   outline-offset: 2px;
 }
 
 /* ------------------------------------------------------------
-   5) Background zone separations (ink neutrals, not navy)
+   Zones / sections — keep ink, avoid “navy SaaS”
 ------------------------------------------------------------ */
 section.hero-section {
   background-color: var(--ao-ink-900) !important;
 }
 
 #what-autoperate-does,
-#what-autoperate-measures {
-  background-color: var(--ao-ink-850) !important;
-}
-
-#how-it-works {
-  background-color: var(--ao-ink-900) !important;
-}
-
-.blog-section {
-  background-color: var(--ao-ink-850) !important;
-}
-
-.faqs-section {
-  background-color: var(--ao-ink-900) !important;
-}
-
+#what-autoperate-measures,
+.blog-section,
 .call-to-action-section {
   background-color: var(--ao-ink-850) !important;
 }
 
+#how-it-works,
+.faqs-section {
+  background-color: var(--ao-ink-900) !important;
+}
+
 /* ------------------------------------------------------------
-   6) Cards / panels: remove blue tint, add quiet borders
+   Cards / panels — quiet borders, no blue tint
 ------------------------------------------------------------ */
 [class*="card"],
 .card,
@@ -235,31 +249,44 @@ section [class*="border"] {
   box-shadow: none !important;
 }
 
+/* Subtle separators */
 hr {
-  border-color: rgba(176, 141, 58, 0.16) !important;
+  border-color: rgba(14, 119, 105, 0.16) !important;
 }
 
 /* ------------------------------------------------------------
-   7) Footer: Autoperate green background (your request)
+   FOOTER — force Autoperate GREEN background (your screenshot shows it’s still navy)
 ------------------------------------------------------------ */
+/* Footer containers (AstroWind variants) */
 footer,
+#footer,
+.site-footer,
 .footer,
-.site-footer {
+.footer-section,
+[class*="footer"] {
   background-color: var(--ao-green) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
 }
 
-footer,
-footer p,
-footer a,
-footer span,
-footer li,
-footer small {
-  color: rgba(255, 255, 255, 0.92) !important;
+/* Sometimes AstroWind nests a “bg-slate/neutral” div inside footer — force it green too */
+footer > div,
+footer > section,
+footer > nav,
+footer > aside,
+footer [class*="bg-"] {
+  background-color: var(--ao-green) !important;
 }
 
+/* Footer text/link contrast */
+footer,
+footer p,
+footer span,
+footer li,
+footer small,
+footer a {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
 footer a:hover {
   color: #ffffff !important;
   text-decoration: underline;
-  text-decoration-color: rgba(255,255,255,0.7);
 }
