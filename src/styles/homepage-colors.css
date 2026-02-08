@@ -1,25 +1,27 @@
-/* Experimental homepage color tests */
+/* HOMEPAGE COLOR TESTING — ACCENT RULES */
+
+/* Color tokens */
 :root {
-  --ao-gold: #B08D3A;
+  --ao-gold: #B08D3A; /* subtle institutional gold */
   --ao-green: #0E7769;
 }
 
-.ao-philosophy-band {
-  border-top: 1px solid var(--ao-gold);
-  border-bottom: 1px solid var(--ao-gold);
-}
-/* ⚠️ Debug test: if this DOES NOT show a red border on the hero, CSS is not loading */
-body {
-  outline: 3px solid red !important;
+/* 1) Separator under the header (Hero) */
+header {
+  border-bottom: 1px solid var(--ao-gold) !important;
 }
 
-/* Other experimental rules */
-:root {
-  --ao-gold: #B08D3A;
+/* 2) Section title accents */
+/* Targets section headings below hero */
+section h2,
+section h3 {
+  color: var(--ao-gold) !important;
 }
 
-.ao-philosophy-band {
-  border-top: 1px solid var(--ao-gold);
-  border-bottom: 1px solid var(--ao-gold);
+/* 3) Accent color on feature icons */
+/* Targets features list icons */
+[class*="icon"] svg,
+[class*="Icon"] svg {
+  stroke: var(--ao-gold) !important;
+  fill: none !important;
 }
-
