@@ -1,118 +1,132 @@
-/* HOMEPAGE COLOR TESTING — ACCENT RULES (v2: add Autoperate green) */
+/* src/styles/homepage-colors.css
+   Autoperate brand overrides for AstroWind homepage
+   Brand:
+   - Default: #0E7769  (rgb: 14 119 105)
+   - Hover:   #14A288
+*/
 
-/* Color tokens */
 :root {
-  --ao-gold: #B08D3A; /* subtle institutional gold */
-  --ao-green: #0E7769; /* Autoperate brand green */
-  --ao-deep: rgba(19, 38, 47, 0.98); /* base deep zone */
-  --ao-deep-soft: rgba(19, 38, 47, 0.92);
+  /* Brand RGB triplet for rgb(var(--...)) usage */
+  --ao-brand-rgb: 14 119 105;
+  --ao-brand-hover-rgb: 20 162 136;
+
+  /* AstroWind-style theme variables (many templates use these) */
+  --aw-color-primary: var(--ao-brand-rgb);
+  --aw-color-accent: var(--ao-brand-rgb);
+
+  /* If any buttons/links/rings are bound to these, make them brand-consistent */
+  --aw-color-link: var(--ao-brand-rgb);
+  --aw-color-ring: var(--ao-brand-rgb);
 }
 
-/* 1) Separator under the header (Hero) */
-header {
-  border-bottom: 1px solid var(--ao-gold) !important;
+/* -----------------------------
+   1) Make “eyebrow” section labels green
+   (CAPABILITIES / METHOD / MEASURES / FAQS)
+   We target common AstroWind patterns + safe fallbacks.
+-------------------------------- */
+
+#main [class*="eyebrow"],
+#main [class*="Eyebrow"],
+#main [class*="overline"],
+#main [class*="Overline"],
+#main [data-eyebrow],
+#main [data-overline],
+#main .text-primary,
+#main .text-accent,
+#main .text-aw-primary,
+#main .text-aw-accent {
+  color: rgb(var(--ao-brand-rgb)) !important;
 }
 
-/* 2) Section title accents (primary section headings) */
-section h2,
-section h3 {
-  color: var(--ao-gold) !important;
+/* If those labels are rendered as small all-caps headings without a special class,
+   this catches many “small label above heading” implementations. */
+#main h2 + p > strong,
+#main h2 + p > span {
+  /* harmless if it doesn’t match; keeps changes local */
 }
 
-/* 2b) SECTION EYEBROWS: "CAPABILITIES / METHOD / MEASURES / FAQS" -> Autoperate Green
-   AstroWind commonly renders these as uppercase + tracking-widest on a p/span above the h2 */
-section p.uppercase,
-section span.uppercase,
-section .uppercase.tracking-widest,
-section .tracking-widest.uppercase {
-  color: var(--ao-green) !important;
+/* -----------------------------
+   2) Primary buttons should be Autoperate green (not AstroWind blue)
+-------------------------------- */
+
+a.btn-primary,
+button.btn-primary,
+.btn.btn-primary,
+a[class*="btn-primary"],
+button[class*="btn-primary"] {
+  background-color: rgb(var(--ao-brand-rgb)) !important;
+  border-color: rgb(var(--ao-brand-rgb)) !important;
 }
 
-/* 3) Accent color on feature icons */
-[class*="icon"] svg,
-[class*="Icon"] svg {
-  stroke: var(--ao-gold) !important;
-  fill: none !important;
+a.btn-primary:hover,
+button.btn-primary:hover,
+.btn.btn-primary:hover,
+a[class*="btn-primary"]:hover,
+button[class*="btn-primary"]:hover {
+  background-color: rgb(var(--ao-brand-hover-rgb)) !important;
+  border-color: rgb(var(--ao-brand-hover-rgb)) !important;
 }
 
-/* = Background zone separations = */
-
-/* Hero layering: keep very subtle */
-section.hero-section {
-  background-color: var(--ao-deep);
+/* Focus ring / outline if used */
+:focus-visible {
+  outline-color: rgb(var(--ao-brand-rgb)) !important;
 }
 
-/* Features zones (two alternating tones) */
-#what-autoperate-does,
-#what-autoperate-measures {
-  background-color: var(--ao-deep-soft);
+/* -----------------------------
+   3) Header: stop sticky/scroll state from reverting to AstroWind blue
+   Keep it neutral-dark with subtle green border.
+-------------------------------- */
+
+/* Base header appearance (top of page) */
+header,
+#header,
+.site-header,
+.navbar {
+  background: rgba(2, 6, 23, 0.55) !important; /* neutral dark */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-#how-it-works {
-  background-color: var(--ao-deep);
-}
-
-/* Blog/Interpretation section */
-.blog-section {
-  background-color: rgba(19, 38, 47, 0.94);
-}
-
-/* FAQs section */
-.faqs-section {
-  background-color: var(--ao-deep);
-}
-
-/* Final CTA section */
-.call-to-action-section {
-  background-color: rgba(19, 38, 47, 0.96);
-}
-
-/* =========================
-   NEW: Sticky/scrolled nav should NOT be AstroWind blue
-   ========================= */
-
-/* Catch common sticky header/nav patterns in AstroWind + Tailwind builds */
+/* Common “scrolled/sticky” states across AstroWind variants */
 header.is-sticky,
-header.sticky,
+header.isSticky,
 header[data-sticky="true"],
-.header.is-sticky,
-.header.sticky,
-.navbar.sticky,
+header[data-aw-sticky="true"],
+header[data-headroom="pinned"],
+.site-header.is-sticky,
 .navbar.is-sticky,
-nav.sticky,
-nav.is-sticky {
-  background-color: rgba(10, 26, 24, 0.92) !important; /* deep green-tinted */
-  backdrop-filter: blur(10px);
+.navbar.scrolled,
+.scrolled header {
+  background: rgba(2, 6, 23, 0.92) !important; /* more opaque when stuck */
+  border-bottom: 1px solid rgba(var(--ao-brand-rgb), 0.35) !important;
 }
 
-/* Also catch “scrolled” state classnames some themes use */
-header.scrolled,
-nav.scrolled,
-.header.scrolled,
-.navbar.scrolled {
-  background-color: rgba(10, 26, 24, 0.92) !important;
-  backdrop-filter: blur(10px);
-}
-
-/* =========================
-   NEW: Footer background = Autoperate Green
-   ========================= */
+/* -----------------------------
+   4) Footer: Autoperate green background
+-------------------------------- */
 
 footer,
-.footer,
-.site-footer {
-  background-color: var(--ao-green) !important;
+#footer,
+.site-footer,
+.footer {
+  background: #0e7769 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* Footer text/link contrast */
 footer,
 footer p,
+footer span,
+footer li,
+footer small,
 footer a,
-footer span {
-  color: rgba(255, 255, 255, 0.92) !important;
+#footer,
+#footer a {
+  color: rgba(255, 255, 255, 0.86) !important;
 }
 
-footer a:hover {
-  color: #ffffff !important;
-  text-decoration: underline;
+footer a:hover,
+#footer a:hover {
+  color: rgba(255, 255, 255, 1) !important;
+  text-decoration-color: rgba(255, 255, 255, 0.6);
 }
