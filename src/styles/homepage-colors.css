@@ -25,3 +25,34 @@ section h3 {
   stroke: var(--ao-gold) !important;
   fill: none !important;
 }
+/* = Background zone separations = */
+
+/* Hero layering: keep very subtle */
+section.hero-section {
+  background-color: rgba(19, 38, 47, 0.98); /* slightly darker than default */
+}
+
+/* Features zones (two alternating tones) */
+#what-autoperate-does,
+#what-autoperate-measures {
+  background-color: rgba(19, 38, 47, 0.92); /* gentle zone color */
+}
+
+#how-it-works {
+  background-color: rgba(19, 38, 47, 0.98); /* slightly darker alternate zone */
+}
+
+/* Blog/Interpretation section */
+.blog-section {
+  background-color: rgba(19, 38, 47, 0.94); /* subtle separation */
+}
+
+/* FAQs section */
+.faqs-section {
+  background-color: rgba(19, 38, 47, 0.98);
+}
+
+/* Final CTA section */
+.call-to-action-section {
+  background-color: rgba(19, 38, 47, 0.96);
+}
