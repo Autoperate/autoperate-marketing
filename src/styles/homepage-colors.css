@@ -1,337 +1,234 @@
 /* src/styles/homepage-colors.css
-   Autoperate Homepage Overrides (v4)
-
-   GOALS
-   - Autoperate GREEN is the primary accent (#0E7769)
-   - GOLD is a restrained secondary “witness mark” only
-   - Kill AstroWind BLUE regressions (nav, sticky states, footer, rings)
-   - Make overrides SAFE: avoid broad selectors that accidentally recolor everything
+   Autoperate homepage color system (dark, institutional, single-accent).
+   Brand green is the only “meaning” color; everything else is neutral support.
 */
 
-/* ------------------------------------------------------------
-   Tokens
------------------------------------------------------------- */
 :root {
-  --ao-green: #0E7769;
-  --ao-green-hover: #14A288;
+  /* ===== Brand ===== */
+  --ao-brand: #0e7769;
+  --ao-brand-hover: #14a288;
 
-  /* Secondary accent ONLY (witness mark) */
-  --ao-gold: #B08D3A;
+  /* Optional “metal” accent (use sparingly; off by default) */
+  --ao-gold: #b89b5e;
+  --ao-gold-muted: #9b8553;
+  --ao-gold-bright: #d2b36b;
 
-  /* Ink neutrals */
-  --ao-ink-950: #070B0E;
-  --ao-ink-900: #0B1116;
-  --ao-ink-875: #0D141A;
-  --ao-ink-850: #0E161D;
-  --ao-ink-800: #101C24;
+  /* ===== Neutrals (locked from your design system) ===== */
+  --ao-border-100: #e5e7eb;
+  --ao-text-600: #4b5563;
+  --ao-subtitle-700: #6c7684;
+  --ao-surface-50: #f8fafc;
+  --ao-disabled-200: #eef2f6;
+  --ao-destructive: #f83e3e;
+  --ao-white: #ffffff;
 
-  /* Text */
-  --ao-text: #E7EEF6;
-  --ao-text-muted: #A8B6C4;
+  /* ===== Homepage dark theme ===== */
+  --ao-bg: #050a0c;              /* page base */
+  --ao-bg-2: #070f12;            /* slightly lifted */
+  --ao-panel: rgba(255, 255, 255, 0.04);
+  --ao-panel-2: rgba(255, 255, 255, 0.06);
+  --ao-border: rgba(255, 255, 255, 0.08);
+  --ao-border-strong: rgba(255, 255, 255, 0.12);
 
-  /* Borders */
-  --ao-border: rgba(19, 35, 45, 0.85);
-  --ao-border-green-soft: rgba(14, 119, 105, 0.22);
-  --ao-border-green: rgba(14, 119, 105, 0.38);
+  --ao-text: rgba(255, 255, 255, 0.92);
+  --ao-text-muted: rgba(255, 255, 255, 0.70);
+  --ao-text-faint: rgba(255, 255, 255, 0.55);
 
-  /* Map AstroWind theme variables back to brand green (so “primary” isn’t blue) */
-  --aw-color-primary: 14 119 105; /* rgb triplet */
-  --aw-color-accent: 14 119 105;
-  --aw-color-link: 14 119 105;
-  --aw-color-ring: 14 119 105;
+  /* Subtle “witness” glow (non-directional) */
+  --ao-glow: rgba(14, 119, 105, 0.28);
+  --ao-glow-strong: rgba(14, 119, 105, 0.42);
+
+  /* Shadows (kept restrained) */
+  --ao-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+
+  /* ===== Radii ===== */
+  --ao-radius-lg: 18px;
+  --ao-radius-md: 12px;
+
+  /* ===== Gradients (used as background atmosphere, not as meaning) ===== */
+  --ao-hero-radial: radial-gradient(
+      900px 520px at 50% 20%,
+      rgba(14, 119, 105, 0.22) 0%,
+      rgba(14, 119, 105, 0.08) 35%,
+      rgba(0, 0, 0, 0) 70%
+    ),
+    radial-gradient(
+      700px 420px at 15% 10%,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 35%,
+      rgba(0, 0, 0, 0) 70%
+    ),
+    radial-gradient(
+      700px 420px at 85% 12%,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.02) 35%,
+      rgba(0, 0, 0, 0) 70%
+    );
+
+  --ao-section-fade: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.28) 45%,
+    rgba(0, 0, 0, 0.48) 100%
+  );
 }
 
-/* ------------------------------------------------------------
-   Global background + base typography
------------------------------------------------------------- */
+/* ===== Global surface + typography ===== */
 html,
 body {
-  background:
-    radial-gradient(
-      1200px 800px at 50% 0%,
-      rgba(14, 119, 105, 0.10) 0%,
-      rgba(7, 11, 14, 0) 55%
-    ),
-    linear-gradient(180deg, var(--ao-ink-900) 0%, var(--ao-ink-950) 100%) !important;
-  color: var(--ao-text) !important;
+  background: var(--ao-bg);
+  color: var(--ao-text);
 }
 
-/* IMPORTANT:
-   Do NOT do `[class*="text-"]` (it breaks Tailwind utility intent).
-   Keep muted text targeted to typical body copy elements. */
-main p,
-main li,
-main small,
-main .text-muted {
-  color: var(--ao-text-muted) !important;
-}
-
-/* Links */
 a {
-  color: rgb(var(--aw-color-link)) !important;
+  color: inherit;
+  text-decoration-color: rgba(14, 119, 105, 0.55);
 }
+
 a:hover {
-  color: var(--ao-green-hover) !important;
+  text-decoration-color: rgba(14, 119, 105, 0.85);
 }
 
-/* ------------------------------------------------------------
-   HEADER / NAV — prevent sticky state from reverting to AstroWind blue
------------------------------------------------------------- */
-header,
-#header,
-.site-header,
-.navbar,
-nav {
-  background-color: rgba(11, 17, 22, 0.86) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--ao-border-green-soft) !important;
+/* ===== AstroWind / Tailwind-friendly tokens =====
+   If the template references generic CSS vars, these help “take over” gently.
+*/
+:root {
+  --accent: var(--ao-brand);
+  --accent-hover: var(--ao-brand-hover);
+  --text-default: var(--ao-text);
+  --text-muted: var(--ao-text-muted);
+  --bg-default: var(--ao-bg);
+  --bg-panel: var(--ao-panel);
+  --border-default: var(--ao-border);
 }
 
-/* Sticky / scrolled variants (AstroWind uses many) */
-header.is-sticky,
-header.sticky,
-header.isSticky,
-header.scrolled,
-header[data-sticky="true"],
-header[data-aw-sticky="true"],
-header[data-headroom="pinned"],
-.navbar.sticky,
-.navbar.is-sticky,
-.navbar.scrolled,
-nav.sticky,
-nav.scrolled,
-.scrolled header,
-.scrolled nav {
-  background-color: rgba(11, 17, 22, 0.96) !important;
-  border-bottom: 1px solid var(--ao-border-green) !important;
+/* ===== Background helpers ===== */
+.ao-hero-bg {
+  background: var(--ao-hero-radial), var(--ao-bg);
 }
 
-/* If any header/nav element gets “bg-primary”, force it off blue */
-header.bg-primary,
-nav.bg-primary,
-.navbar.bg-primary,
-header [class*="bg-primary"],
-nav [class*="bg-primary"] {
-  background-color: rgba(11, 17, 22, 0.96) !important;
+.ao-section-bg {
+  background: var(--ao-bg);
 }
 
-/* Nav active / focus rings */
-header a:focus-visible,
-nav a:focus-visible {
-  outline: 2px solid rgba(14, 119, 105, 0.38) !important;
-  outline-offset: 3px;
+.ao-section-divider {
+  border-top: 1px solid var(--ao-border);
 }
 
-/* ------------------------------------------------------------
-   SECTION EYEBROWS — CAPABILITIES / METHOD / MEASURES / FAQS => GREEN
-   (small uppercase labels above headings)
------------------------------------------------------------- */
-section p.uppercase,
-section span.uppercase,
-section .uppercase.tracking-widest,
-section .tracking-widest.uppercase,
-#main section p.uppercase,
-#main section span.uppercase {
-  color: var(--ao-green) !important;
+/* ===== Cards / panels ===== */
+.ao-card {
+  background: var(--ao-panel);
+  border: 1px solid var(--ao-border);
+  border-radius: var(--ao-radius-lg);
+  box-shadow: none;
 }
 
-/* ------------------------------------------------------------
-   Headings — calm, serious, no gold-led typography
------------------------------------------------------------- */
-h1,
-h2,
-h3,
-h4 {
-  color: var(--ao-text) !important;
+.ao-card:hover {
+  border-color: var(--ao-border-strong);
 }
 
-/* Subtle witness mark under section H2 (optional, restrained) */
-section h2::after {
-  content: "";
-  display: block;
-  width: 48px;
-  height: 2px;
-  margin-top: 10px;
-  background: rgba(176, 141, 58, 0.28); /* gold only as witness */
+.ao-card--raised {
+  background: var(--ao-panel-2);
+  border: 1px solid var(--ao-border-strong);
+  border-radius: var(--ao-radius-lg);
+  box-shadow: var(--ao-shadow);
 }
 
-/* ------------------------------------------------------------
-   ICONS — remove bright blue badges; use GREEN strokes
------------------------------------------------------------- */
-/* Most AstroWind icons are inline SVG; make them green without filling */
-svg[stroke]:not([stroke="none"]) {
-  stroke: var(--ao-green) !important;
-}
-svg[fill]:not([fill="none"]) {
-  /* keep fills from turning into loud blocks; only soften if template filled them */
-  fill: currentColor;
+/* ===== Buttons ===== */
+.ao-btn-primary {
+  background: var(--ao-brand);
+  color: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(14, 119, 105, 0.18);
 }
 
-/* Circular icon wrappers / badges (template uses soft backgrounds) */
-span[class*="icon"],
-span[class*="Icon"],
-div[class*="icon"],
-div[class*="Icon"],
-[class*="badge"],
-[class*="Badge"] {
-  background-color: rgba(14, 119, 105, 0.10) !important;
-  border: 1px solid var(--ao-border-green-soft) !important;
-  box-shadow: none !important;
+.ao-btn-primary:hover {
+  background: var(--ao-brand-hover);
 }
 
-/* Tailwind “primary” utilities — steer away from navy/blue */
-.bg-primary,
-[class*="bg-primary"] {
-  background-color: rgba(14, 119, 105, 0.12) !important;
-}
-.text-primary,
-[class*="text-primary"] {
-  color: var(--ao-green) !important;
-}
-
-/* ------------------------------------------------------------
-   BUTTONS — primary = GREEN, secondary = ink + green border
------------------------------------------------------------- */
-button,
-a.button,
-a.btn,
-[class*="btn"],
-[class*="Button"] {
+.ao-btn-secondary {
+  background: transparent;
+  color: var(--ao-text);
+  border: 1px solid var(--ao-border);
   border-radius: 999px;
 }
 
-/* Primary CTA (Request access) */
-a[href*="request"],
-a[href*="access"],
-button[type="submit"],
-.btn-primary,
-.button-primary,
-.primary {
-  background-color: var(--ao-green) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(14, 119, 105, 0.45) !important;
-  box-shadow: none !important;
-}
-a[href*="request"]:hover,
-a[href*="access"]:hover,
-.btn-primary:hover,
-.button-primary:hover,
-.primary:hover {
-  background-color: var(--ao-green-hover) !important;
-  border-color: rgba(20, 162, 136, 0.55) !important;
+.ao-btn-secondary:hover {
+  border-color: var(--ao-border-strong);
+  background: rgba(255, 255, 255, 0.03);
 }
 
-/* Secondary button (How it works) */
-a[href*="how"],
-a[href*="works"],
-.btn-secondary,
-.button-secondary,
-.secondary {
-  background-color: transparent !important;
-  color: var(--ao-text) !important;
-  border: 1px solid rgba(14, 119, 105, 0.35) !important;
-  box-shadow: none !important;
-}
-a[href*="how"]:hover,
-a[href*="works"]:hover,
-.btn-secondary:hover,
-.button-secondary:hover,
-.secondary:hover {
-  background-color: rgba(14, 119, 105, 0.08) !important;
-  border-color: rgba(14, 119, 105, 0.55) !important;
+/* ===== Nav / chips ===== */
+.ao-chip {
+  background: rgba(14, 119, 105, 0.12);
+  border: 1px solid rgba(14, 119, 105, 0.22);
+  color: rgba(255, 255, 255, 0.90);
+  border-radius: 999px;
 }
 
-/* Focus rings: green, not electric blue */
-*:focus {
-  outline: none !important;
-}
-*:focus-visible {
-  outline: 2px solid rgba(14, 119, 105, 0.38) !important;
-  outline-offset: 2px;
+.ao-nav-active {
+  color: var(--ao-text);
+  background: rgba(14, 119, 105, 0.16);
+  border: 1px solid rgba(14, 119, 105, 0.25);
 }
 
-/* ------------------------------------------------------------
-   Zones / sections — keep ink, avoid “navy SaaS”
------------------------------------------------------------- */
-/* Keep overall sections ink-dark, but allow subtle differentiation */
-section.hero-section {
-  background-color: var(--ao-ink-900) !important;
+/* ===== Typography helpers ===== */
+.ao-kicker {
+  color: rgba(14, 119, 105, 0.90);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-#what-autoperate-does,
-#what-autoperate-measures,
-.blog-section,
-.call-to-action-section {
-  background-color: var(--ao-ink-875) !important;
+.ao-muted {
+  color: var(--ao-text-muted);
 }
 
-#how-it-works,
-.faqs-section {
-  background-color: var(--ao-ink-900) !important;
+.ao-faint {
+  color: var(--ao-text-faint);
 }
 
-/* ------------------------------------------------------------
-   Cards / panels — quiet borders, no blue tint
------------------------------------------------------------- */
-.card,
-[class*="card"],
-section [class*="shadow"],
-section [class*="border"] {
-  background-color: rgba(16, 28, 36, 0.72) !important;
-  border: 1px solid var(--ao-border) !important;
-  box-shadow: none !important;
+/* ===== Optional: gold “witness” trim (disabled unless you add class) ===== */
+.ao-use-gold .ao-kicker {
+  color: rgba(184, 155, 94, 0.92);
 }
 
-/* Subtle separators */
-hr {
-  border-color: rgba(14, 119, 105, 0.16) !important;
+.ao-use-gold .ao-chip {
+  background: rgba(184, 155, 94, 0.10);
+  border-color: rgba(184, 155, 94, 0.22);
 }
 
-/* ------------------------------------------------------------
-   Blog cards / “Interpretation & theory” — keep titles readable + consistent
------------------------------------------------------------- */
-.blog-section h3,
-.blog-section h4 {
-  color: var(--ao-text) !important;
-}
-.blog-section a:hover h3,
-.blog-section a:hover h4 {
-  color: var(--ao-green-hover) !important;
+/* ===== Footer ===== */
+.ao-footer {
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid var(--ao-border);
 }
 
-/* ------------------------------------------------------------
-   FOOTER — force Autoperate GREEN background
------------------------------------------------------------- */
-footer,
-#footer,
-.site-footer,
-.footer,
-.footer-section,
-[class*="footer"] {
-  background-color: var(--ao-green) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+.ao-footer a {
+  color: var(--ao-text-muted);
 }
 
-/* AstroWind nests “bg-*” divs inside footer — force green */
-footer > div,
-footer > section,
-footer > nav,
-footer > aside,
-footer [class*="bg-"] {
-  background-color: var(--ao-green) !important;
+.ao-footer a:hover {
+  color: var(--ao-text);
 }
 
-/* Footer text/link contrast */
-footer,
-footer p,
-footer span,
-footer li,
-footer small,
-footer a {
-  color: rgba(255, 255, 255, 0.92) !important;
+/* ===== Focus (accessibility, restrained) ===== */
+:focus-visible {
+  outline: 2px solid rgba(14, 119, 105, 0.55);
+  outline-offset: 3px;
+  border-radius: 8px;
 }
-footer a:hover {
-  color: #ffffff !important;
-  text-decoration: underline;
+
+/* ===== Selection ===== */
+::selection {
+  background: rgba(14, 119, 105, 0.35);
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
 }
