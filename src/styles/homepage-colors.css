@@ -1,9 +1,9 @@
 /* src/styles/homepage-colors.css
-   Autoperate Homepage Overrides (v3)
+   Autoperate Homepage Overrides (v4)
    GOAL:
    - Make Autoperate GREEN the primary accent
    - Reduce GOLD to a secondary “witness mark”
-   - Kill AstroWind BLUE regressions (sticky nav + footer + primary utilities)
+   - Kill AstroWind BLUE regressions (sticky wrapper + footer + primary utilities)
 */
 
 /* ------------------------------------------------------------
@@ -25,11 +25,16 @@
   --ao-text: #E7EEF6;
   --ao-text-muted: #A8B6C4;
 
-  /* Map common theme variables back to brand green (so “primary” isn’t blue) */
+  /* Map common AstroWind theme vars back to brand green (so “primary” isn’t blue) */
   --aw-color-primary: 14 119 105; /* rgb triplet */
   --aw-color-accent: 14 119 105;
   --aw-color-link: 14 119 105;
   --aw-color-ring: 14 119 105;
+
+  /* AstroWind surfaces (prevents navy sections from winning) */
+  --aw-color-bg-page: 7 11 14;   /* near --ao-ink-950 */
+  --aw-color-bg: 11 17 22;       /* near --ao-ink-900 */
+  --aw-color-surface: 16 28 36;  /* near --ao-ink-800 */
 }
 
 /* ------------------------------------------------------------
@@ -45,15 +50,28 @@ body {
   color: var(--ao-text) !important;
 }
 
+/* Safer muting: avoid nuking every Tailwind `text-*` utility */
 p,
 li,
 .text-muted,
-[class*="text-"] {
-  color: var(--ao-text-muted);
+.text-slate-400,
+.text-gray-400,
+.text-zinc-400 {
+  color: var(--ao-text-muted) !important;
+}
+
+/* Keep headings crisp */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--ao-text) !important;
 }
 
 /* ------------------------------------------------------------
-   HEADER / NAV — prevent sticky state from reverting to AstroWind blue
+   HEADER / NAV — prevent sticky state from reverting to AstroWind navy
 ------------------------------------------------------------ */
 /* Base (top of page) */
 header,
@@ -86,7 +104,7 @@ nav.scrolled,
   border-bottom: 1px solid rgba(14, 119, 105, 0.40) !important;
 }
 
-/* If any header/nav element itself gets a “bg-primary” class on scroll, force it off blue */
+/* If any header/nav element itself gets a “bg-primary” class on scroll, force it off */
 header.bg-primary,
 nav.bg-primary,
 .navbar.bg-primary,
@@ -96,8 +114,46 @@ nav [class*="bg-primary"] {
 }
 
 /* ------------------------------------------------------------
+   HEADER WRAPPERS (this is usually where the navy comes from)
+------------------------------------------------------------ */
+.headroom,
+.headroom-wrapper,
+.headroom--pinned,
+.headroom--not-top,
+[data-headroom],
+.header-wrapper,
+.header-container,
+.navbar-wrapper,
+#header > div,
+#header > section,
+header > div:first-child {
+  background-color: rgba(11, 17, 22, 0.96) !important;
+  border-bottom: 1px solid rgba(14, 119, 105, 0.40) !important;
+}
+
+/* If the wrapper is "fixed/sticky top-0" with a bg class, force it too */
+.fixed.top-0,
+.sticky.top-0 {
+  background-color: rgba(11, 17, 22, 0.96) !important;
+}
+
+/* ------------------------------------------------------------
+   “Philosophy” strip / announcement band
+------------------------------------------------------------ */
+.philosophy,
+.philosophy-strip,
+.announcement,
+.announcement-bar,
+section[class*="philosophy"],
+div[class*="philosophy"] {
+  background-color: rgba(16, 28, 36, 0.72) !important;
+  border-top: 1px solid rgba(14, 119, 105, 0.18) !important;
+  border-bottom: 1px solid rgba(14, 119, 105, 0.18) !important;
+}
+
+/* ------------------------------------------------------------
    SECTION EYEBROWS — CAPABILITIES / METHOD / MEASURES / FAQS => GREEN
-   (these are the small uppercase labels above H2)
+   (small uppercase labels above H2)
 ------------------------------------------------------------ */
 section p.uppercase,
 section span.uppercase,
@@ -116,7 +172,7 @@ section h3 {
   color: var(--ao-text) !important;
 }
 
-/* Subtle witness mark: thin underline / divider tone (optional, but restrained) */
+/* Subtle witness mark: thin underline / divider tone (restrained) */
 section h2::after {
   content: "";
   display: block;
@@ -255,7 +311,7 @@ hr {
 }
 
 /* ------------------------------------------------------------
-   FOOTER — force Autoperate GREEN background (your screenshot shows it’s still navy)
+   FOOTER — force Autoperate GREEN background
 ------------------------------------------------------------ */
 /* Footer containers (AstroWind variants) */
 footer,
@@ -268,7 +324,7 @@ footer,
   border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
 }
 
-/* Sometimes AstroWind nests a “bg-slate/neutral” div inside footer — force it green too */
+/* Sometimes AstroWind nests a “bg-*” div inside footer — force it green too */
 footer > div,
 footer > section,
 footer > nav,
