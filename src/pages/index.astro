@@ -1,5 +1,6 @@
 ---
-import '~/styles/homepage-colors.css';  // ← NEW: homepage color overrides
+import '~/styles/homepage-colors.css';
+
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
@@ -29,8 +30,118 @@ const metadata = {
       },
       { text: 'How it works', href: '#how-it-works' },
     ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'Autoperate' }}
   >
+    <Fragment slot="bg">
+      <svg class="h-full w-full" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="presentation">
+        <g fill="none" stroke="#0E7769" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.08">
+          <path d="M-160 40 C 80 20 260 60 460 42 S 760 24 980 46 S 1260 64 1400 52" stroke-width="0.8" />
+          <path d="M-140 90 C 120 70 320 110 520 88 S 860 66 1080 96 S 1280 118 1440 104" stroke-width="0.9" />
+          <path d="M-120 125 C 140 110 340 140 560 122 S 880 102 1100 132 S 1320 156 1460 144" stroke-width="0.8" />
+        </g>
+        <g fill="none" stroke="#0E7769" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.12">
+          <path d="M60 680 C 180 610 260 640 360 600 S 540 520 700 560 S 940 640 1140 600 S 1280 560 1380 620" stroke-width="0.9" />
+          <path d="M-80 260 C 60 220 160 260 260 230 S 420 180 560 210 S 760 290 900 260 S 1120 220 1300 260" stroke-width="1" />
+          <path d="M140 700 C 160 560 200 460 280 380 S 440 240 580 200 S 820 170 980 120 S 1160 120 1260 100" stroke-width="0.9" />
+          <path d="M-60 360 C 60 320 160 360 260 330 S 420 260 560 310 S 780 400 900 370 S 1100 320 1260 360" stroke-width="1.2" />
+          <path d="M-40 620 C 120 580 240 610 340 570 S 520 500 660 530 S 860 600 1040 570 S 1240 520 1320 580" stroke-width="1" />
+          <path d="M20 200 C 140 240 220 300 320 320 S 520 320 660 360 S 860 440 1020 480 S 1180 520 1300 580" stroke-width="1" />
+        </g>
+        <g fill="none" stroke="#0E7769" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.18">
+          <path d="M-60 140 C 80 120 180 170 300 140 S 520 110 660 150 S 860 210 980 170 S 1240 130 1320 190" stroke-width="1" />
+          <path d="M-40 520 C 140 460 220 540 360 500 S 600 420 760 460 S 980 540 1180 500 S 1320 450 1400 520" stroke-width="1.1" />
+          <path d="M40 140 C 160 200 260 220 360 200 S 520 150 640 200 S 820 280 980 230 S 1160 160 1260 200" stroke-width="0.8" />
+          <path d="M200 120 C 260 200 340 220 420 190 S 560 120 660 180 S 760 300 900 280 S 1080 220 1180 300" stroke-width="1.1" />
+          <path d="M860 120 C 900 180 980 220 1040 260 S 1120 360 1080 430 S 980 520 900 600 S 820 660 760 700" stroke-width="1" />
+          <path d="M1040 120 C 1100 200 1160 260 1120 330 S 1020 460 900 520 S 780 590 640 640 S 520 670 440 700" stroke-width="0.9" />
+          <path d="M320 120 C 360 180 420 230 520 260 S 700 260 800 300 S 980 380 1120 430" stroke-width="0.9" />
+          <path d="M1180 700 C 1120 640 1040 600 980 560 S 860 500 760 470 S 600 430 500 420 S 360 400 220 360" stroke-width="1" />
+        </g>
+        <g fill="none" stroke="#0E7769" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.14">
+          <path d="M-10 28 L 36 20" stroke-width="0.8" />
+          <path d="M108 56 L 132 76" stroke-width="0.8" />
+          <path d="M1160 40 L 1216 28" stroke-width="0.8" />
+          <path d="M1188 122 L 1234 136" stroke-width="0.8" />
+          <path d="M18 180 L 44 192" stroke-width="0.8" />
+          <path d="M36 612 L 74 600" stroke-width="0.8" />
+          <path d="M82 666 L 126 652" stroke-width="0.8" />
+          <path d="M1120 612 L 1164 624" stroke-width="0.8" />
+          <path d="M1146 664 L 1190 682" stroke-width="0.8" />
+          <path d="M-6 332 L 26 324" stroke-width="0.8" />
+          <path d="M1196 328 L 1232 312" stroke-width="0.8" />
+          <path d="M-12 460 L 20 474" stroke-width="0.8" />
+        </g>
+        <g fill="#0E7769" fill-opacity="0.12">
+          <circle cx="-20" cy="90" r="2.4" />
+          <circle cx="130" cy="120" r="2.1" />
+          <circle cx="260" cy="140" r="2.6" />
+          <circle cx="610" cy="90" r="2.4" />
+          <circle cx="900" cy="120" r="1.6" />
+          <circle cx="1060" cy="90" r="1.7" />
+          <circle cx="1240" cy="200" r="1.9" />
+          <circle cx="140" cy="230" r="2.0" />
+          <circle cx="420" cy="180" r="2.2" />
+          <circle cx="620" cy="240" r="2.6" />
+          <circle cx="820" cy="300" r="2.2" />
+          <circle cx="1020" cy="230" r="2.4" />
+          <circle cx="1200" cy="290" r="2.1" />
+          <circle cx="260" cy="380" r="2.2" />
+          <circle cx="440" cy="300" r="2.4" />
+          <circle cx="760" cy="400" r="1.9" />
+          <circle cx="980" cy="350" r="1.6" />
+          <circle cx="1180" cy="360" r="1.8" />
+          <circle cx="160" cy="480" r="1.7" />
+          <circle cx="420" cy="460" r="2.5" />
+          <circle cx="620" cy="460" r="2.1" />
+          <circle cx="820" cy="540" r="2.4" />
+          <circle cx="1020" cy="470" r="2.2" />
+          <circle cx="1220" cy="540" r="2.5" />
+          <circle cx="260" cy="610" r="2.4" />
+          <circle cx="480" cy="560" r="2.2" />
+          <circle cx="760" cy="620" r="2.6" />
+          <circle cx="1040" cy="580" r="2.1" />
+        </g>
+        <g fill="#0E7769" fill-opacity="0.18">
+          <circle cx="70" cy="70" r="1.8" />
+          <circle cx="210" cy="95" r="1.6" />
+          <circle cx="320" cy="80" r="1.5" />
+          <circle cx="820" cy="150" r="2.3" />
+          <circle cx="980" cy="110" r="2.1" />
+          <circle cx="1180" cy="140" r="2.4" />
+          <circle cx="60" cy="260" r="1.6" />
+          <circle cx="320" cy="220" r="1.7" />
+          <circle cx="520" cy="210" r="1.5" />
+          <circle cx="720" cy="280" r="1.8" />
+          <circle cx="910" cy="260" r="1.6" />
+          <circle cx="1120" cy="260" r="1.7" />
+          <circle cx="180" cy="340" r="1.8" />
+          <circle cx="340" cy="330" r="1.6" />
+          <circle cx="660" cy="360" r="2.6" />
+          <circle cx="880" cy="380" r="2.1" />
+          <circle cx="1080" cy="330" r="2.3" />
+          <circle cx="80" cy="520" r="2.4" />
+          <circle cx="240" cy="540" r="2.2" />
+          <circle cx="520" cy="430" r="1.8" />
+          <circle cx="720" cy="500" r="1.7" />
+          <circle cx="920" cy="500" r="1.6" />
+          <circle cx="1120" cy="500" r="1.8" />
+          <circle cx="160" cy="640" r="1.9" />
+          <circle cx="360" cy="590" r="1.7" />
+          <circle cx="620" cy="570" r="1.8" />
+          <circle cx="900" cy="600" r="1.7" />
+          <circle cx="1260" cy="640" r="2.5" />
+        </g>
+        <g fill="#C2A24A" fill-opacity="0.16">
+          <circle cx="40" cy="140" r="1.5" />
+          <circle cx="540" cy="140" r="1.6" />
+          <circle cx="900" cy="210" r="1.4" />
+          <circle cx="160" cy="420" r="1.5" />
+          <circle cx="760" cy="420" r="1.6" />
+          <circle cx="1140" cy="360" r="1.4" />
+          <circle cx="220" cy="600" r="1.5" />
+          <circle cx="980" cy="560" r="1.6" />
+        </g>
+      </svg>
+    </Fragment>
     <Fragment slot="title">
       Operational Truth.
     </Fragment>
