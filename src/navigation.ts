@@ -5,6 +5,12 @@ export const headerData = {
     { text: 'Home', href: getPermalink('/') },
     { text: 'Request access', href: getPermalink('/access') },
     { text: 'Interpretation', href: getBlogPermalink() },
+    {
+      text: 'Login',
+      href: 'https://app.autoperate.com',
+      target: '_blank',
+      rel: 'noopener noreferrer',
+    },
   ],
   actions: [],
 };
