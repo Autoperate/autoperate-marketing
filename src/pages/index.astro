@@ -1,5 +1,5 @@
 ---
-import '~/styles/homepage-colors.css';  // ← NEW: homepage color overrides
+import '~/styles/homepage-colors.css';
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
@@ -9,6 +9,8 @@ import Features2 from '~/components/widgets/Features2.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const SHOW_BLOG = false; // ← flip to true when ready to launch blog section
 
 const metadata = {
   title: 'Autoperate — Operational Truth. Know Where You Stand.',
@@ -41,8 +43,7 @@ const metadata = {
   </Hero>
 
   <!-- Philosophy Note ************** -->
-  
-  <!-- Wrapped in an accent band for homepage colors -->
+
   <div class="ao-philosophy-band">
     <Note title="Philosophy" description="Facts are immutable. Interpretation is human." />
   </div>
@@ -168,16 +169,14 @@ const metadata = {
     </Fragment>
   </Features2>
 
-  
-<!-- Interpretation & theory (Blog) -->
- {/*
-  <BlogLatestPosts
-    title="Interpretation & theory"
-    information={`Autoperate records operational truth.
+  <!-- Interpretation & theory (Blog) -->
+  {SHOW_BLOG && (
+    <BlogLatestPosts
+      title="Interpretation & theory"
+      information={`Autoperate records operational truth.
 Interpretation happens alongside the instrument—explicitly, carefully, and without pretending the system is speaking for you.`}
-  />
-*/}
-
+    />
+  )}
 
   <!-- FAQs ************************* -->
 
