@@ -2,7 +2,8 @@
 publishDate: 2026-02-12T00:00:00Z
 title: Why Your Profit Margin Is Wrong
 excerpt: Your profit margin can look perfect and still leave you broke—because margin ignores time, capacity, and obligation. This is why “cashflow” shows up right when you’re “60% done.”
-image: /why-your-profit-margin-is-wrong/Autoperate-why-your-profit-margin-is-wrong-projected-vs-actual-profit.png
+image: https://images.unsplash.com/photo-1546984575-757f4f7c13cf?auto=format&fit=crop&w=2070&q=80
+
 tags:
   - operetics
   - profit
