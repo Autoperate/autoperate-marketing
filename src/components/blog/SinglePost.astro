@@ -16,6 +16,10 @@ export interface Props {
 }
 
 const { post, url } = Astro.props;
+const useImgTag =
+  typeof post.image === 'string' &&
+  (post.image.startsWith('/') || post.image.startsWith('http://') || post.image.startsWith('https://'));
+const imageAlt = post?.excerpt || post?.title || '';
 ---
 
 <section class="py-8 sm:py-16 lg:py-20 mx-auto">
@@ -72,17 +76,27 @@ const { post, url } = Astro.props;
 
       {
         post.image ? (
-          <Image
-            src={post.image}
-            class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post?.excerpt || ''}
-            width={900}
-            height={506}
-            loading="eager"
-            decoding="async"
-          />
+          useImgTag ? (
+            <img
+              src={post.image}
+              class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
+              alt={imageAlt}
+              loading="eager"
+              decoding="async"
+            />
+          ) : (
+            <Image
+              src={post.image}
+              class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
+              widths={[400, 900]}
+              sizes="(max-width: 900px) 400px, 900px"
+              alt={imageAlt}
+              width={900}
+              height={506}
+              loading="eager"
+              decoding="async"
+            />
+          )
         ) : (
           <div class="max-w-3xl mx-auto px-4 sm:px-6">
             <div class="border-t dark:border-slate-700" />

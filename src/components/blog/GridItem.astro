@@ -13,6 +13,9 @@ export interface Props {
 
 const { post } = Astro.props;
 const image = await findImage(post.image);
+const useImgTag =
+  typeof image === 'string' && (image.startsWith('/') || image.startsWith('http://') || image.startsWith('https://'));
+const imageAlt = post.title || '';
 
 const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : '';
 ---
@@ -25,32 +28,54 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
       image &&
         (link ? (
           <a href={link}>
-            <Image
-              src={image}
-              class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-              widths={[400, 900]}
-              width={400}
-              sizes="(max-width: 900px) 400px, 900px"
-              alt={post.title}
-              aspectRatio="16:9"
-              layout="cover"
-              loading="lazy"
-              decoding="async"
-            />
+            {useImgTag ? (
+              <img
+                src={image}
+                class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+                alt={imageAlt}
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <Image
+                src={image}
+                class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+                widths={[400, 900]}
+                width={400}
+                sizes="(max-width: 900px) 400px, 900px"
+                alt={imageAlt}
+                aspectRatio="16:9"
+                layout="cover"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
           </a>
         ) : (
-          <Image
-            src={image}
-            class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            width={400}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post.title}
-            aspectRatio="16:9"
-            layout="cover"
-            loading="lazy"
-            decoding="async"
-          />
+          <>
+            {useImgTag ? (
+              <img
+                src={image}
+                class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+                alt={imageAlt}
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <Image
+                src={image}
+                class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+                widths={[400, 900]}
+                width={400}
+                sizes="(max-width: 900px) 400px, 900px"
+                alt={imageAlt}
+                aspectRatio="16:9"
+                layout="cover"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+          </>
         ))
     }
   </div>

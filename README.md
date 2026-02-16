@@ -159,6 +159,12 @@ All commands are run from the root of the project, from a terminal:
 
 <br>
 
+### Content management
+
+Open `/admin`, login via Netlify Identity, create posts. Images upload to `public/images/blog`.
+
+<br>
+
 ### Configuration
 
 Basic configuration file: `./src/config.yaml`
