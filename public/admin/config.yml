@@ -1,0 +1,27 @@
+backend:
+  name: git-gateway
+publish_mode: editorial_workflow
+
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+collections:
+  - name: "post"
+    label: "Posts"
+    folder: "src/data/post"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", time_format: "HH:mm", picker_utc: true }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Cover Image", name: "image", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - label: "Metadata"
+        name: "metadata"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Canonical", name: "canonical", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
