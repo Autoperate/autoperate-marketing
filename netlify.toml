@@ -8,6 +8,19 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 [[redirects]]
+  from = "/admin/config.yml"
+  to = "/admin/config.yml"
+  status = 200
+  force = true
+[[redirects]]
   from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+[[redirects]]
+  from = "/admin/"
+  to = "/admin/index.html"
+  status = 200
+[[redirects]]
+  from = "/admin/*"
   to = "/admin/index.html"
   status = 200
