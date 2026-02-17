@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Autoperate
+  site: 'https://sweet-sawine-c507ca.netlify.app'
   base: '/'
   trailingSlash: false
 
@@ -9,22 +9,22 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Autoperate
+    template: '%s — Autoperate'
+  description: "Autoperate records operational reality as it occurs and derives clear states from those facts—without prescribing judgment or action."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: Autoperate
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
+    handle: ''
+    site: ''
     cardType: summary_large_image
 
 i18n:
